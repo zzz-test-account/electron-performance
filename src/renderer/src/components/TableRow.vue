@@ -27,7 +27,7 @@ function fmt(ts: number): string {
   display: flex;
   height: 32px;
   line-height: 32px;
-  border-bottom: 1px solid #1e2a38;
+  border-bottom: 1px solid #eef1f6;
   font-variant-numeric: tabular-nums;
 }
 .cell {
@@ -38,11 +38,11 @@ function fmt(ts: number): string {
 }
 .cell-ts {
   flex: 1;
-  color: #9fb3c8;
+  color: #5b6b7d;
 }
 .cell-ch {
   width: 80px;
-  color: #4da3ff;
+  color: #2563eb;
 }
 .cell-val {
   width: 120px;

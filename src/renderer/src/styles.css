@@ -1,14 +1,29 @@
 /**
- * 全局样式：深色工程风，突出数据可读性（等宽数字）。
+ * 全局样式：浅色工程风，突出数据可读性（等宽数字）。
+ * 如需切回深色，仅需调整本文件的色板变量与各面板局部色值。
  */
+:root {
+  --bg: #eef1f6;
+  --panel-bg: #ffffff;
+  --panel-border: #dde3ec;
+  --text: #2c3e50;
+  --text-dim: #8a97a8;
+  --accent: #2563eb;
+  --control-bg: #ffffff;
+  --control-border: #cfd8e3;
+  --scrollbar: #c4cdd9;
+  --warn: #c77d0a;
+  --warn-border: #e8c37e;
+}
+
 html,
 body,
 #app {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #0d141c;
-  color: #c9d6e2;
+  background: var(--bg);
+  color: var(--text);
   font-family:
     'Segoe UI',
     'PingFang SC',
@@ -19,10 +34,11 @@ body,
 }
 
 .panel {
-  background: #111b26;
-  border: 1px solid #1e2a38;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(30, 50, 80, 0.06);
 }
 
 .panel-header {
@@ -30,7 +46,7 @@ body,
   align-items: center;
   gap: 12px;
   padding: 8px 12px;
-  border-bottom: 1px solid #1e2a38;
+  border-bottom: 1px solid var(--panel-border);
   font-size: 13px;
 }
 
@@ -39,14 +55,14 @@ body,
 }
 
 .panel-info {
-  color: #5f7285;
+  color: var(--text-dim);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
 .panel-loading {
   margin-left: auto;
-  color: #4da3ff;
+  color: var(--accent);
   font-size: 12px;
 }
 
@@ -55,6 +71,6 @@ body,
   height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a3a4c;
+  background: var(--scrollbar);
   border-radius: 4px;
 }

@@ -122,8 +122,8 @@ onMounted(reset);
   height: 28px;
   line-height: 28px;
   font-size: 12px;
-  color: #5f7285;
-  border-bottom: 1px solid #2a3a4c;
+  color: #8a97a8;
+  border-bottom: 1px solid var(--panel-border);
 }
 .cell {
   padding: 0 12px;
@@ -140,9 +140,9 @@ onMounted(reset);
 }
 .channel-filter {
   margin-left: 12px;
-  background: #16222e;
-  color: #c9d6e2;
-  border: 1px solid #2a3a4c;
+  background: var(--control-bg);
+  color: var(--text);
+  border: 1px solid var(--control-border);
   border-radius: 4px;
   padding: 2px 6px;
   font-size: 12px;

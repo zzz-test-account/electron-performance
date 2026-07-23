@@ -145,17 +145,17 @@ onBeforeUnmount(() => {
   margin-right: 12px;
 }
 .badge {
-  background: #16222e;
-  border: 1px solid #2a3a4c;
+  background: #f2f5f9;
+  border: 1px solid var(--control-border);
   border-radius: 10px;
   padding: 2px 10px;
   font-size: 12px;
-  color: #9fb3c8;
+  color: #5b6b7d;
   font-variant-numeric: tabular-nums;
 }
 .badge-warn {
-  color: #ffb74d;
-  border-color: #7a5a2a;
+  color: var(--warn);
+  border-color: var(--warn-border);
 }
 .controls {
   display: flex;
@@ -163,21 +163,22 @@ onBeforeUnmount(() => {
   gap: 10px;
   padding: 8px 0;
   font-size: 13px;
-  color: #9fb3c8;
+  color: #5b6b7d;
   flex-wrap: wrap;
 }
 .controls select,
 .controls button {
-  background: #16222e;
-  color: #c9d6e2;
-  border: 1px solid #2a3a4c;
+  background: var(--control-bg);
+  color: var(--text);
+  border: 1px solid var(--control-border);
   border-radius: 4px;
   padding: 4px 10px;
   font-size: 12px;
   cursor: pointer;
 }
 .controls button:hover {
-  border-color: #4da3ff;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .spacer {
   flex: 1;

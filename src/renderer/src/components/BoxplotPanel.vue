@@ -111,11 +111,16 @@ function buildOption(
     grid: { left: 56, right: 16, top: 8, bottom: 56 },
     xAxis: { type: 'category', data: categories, axisLabel: { interval: Math.ceil(categories.length / 8) } },
     yAxis: { type: 'value', scale: true },
-    brush: { toolbox: ['lineX', 'clear'], xAxisIndex: 0, throttle: 150 },
+    brush: {
+      toolbox: ['lineX', 'clear'],
+      xAxisIndex: 0,
+      throttleType: 'debounce', 
+      throttleDelay: 150 ,
+    },
     toolbox: { feature: { brush: { type: ['lineX', 'clear'] } }, right: 8 },
     series: [
-      { type: 'boxplot', data: boxData, itemStyle: { color: '#1f3b57', borderColor: '#4da3ff' } },
-      { type: 'scatter', data: scatterData, symbolSize: 3, itemStyle: { color: '#ff6b6b' } },
+      { type: 'boxplot', data: boxData, itemStyle: { color: 'rgba(59,130,246,0.30)', borderColor: '#2563eb' } },
+      { type: 'scatter', data: scatterData, symbolSize: 3, itemStyle: { color: '#dc2626' } },
     ],
   };
 }
@@ -123,6 +128,13 @@ function buildOption(
 onMounted(() => {
   const c = echarts.init(container.value!);
   chart.value = c;
+
+  // 点击箱体直接下钻到该时间桶（最直观的联动方式，方案 §5.2 箱体→区间穿透）
+  c.on('click', (params: unknown) => {
+    const p = params as { seriesType?: string; dataIndex?: number };
+    if (p.seriesType !== 'boxplot' || p.dataIndex == null) return;
+    drillInto(p.dataIndex);
+  });
 
   // brush 框选箱体 → 类目区间换算回时间范围 → 联动 SignalChart（方案 §5.2）
   c.on('brushSelected', (e: unknown) => {
@@ -150,6 +162,15 @@ onMounted(() => {
   );
 });
 
+/** 下钻到第 index 个箱体对应的时间桶 */
+function drillInto(index: number): void {
+  if (index >= currentBucketStarts.length) return;
+  store.setRange({
+    start: currentBucketStarts[index],
+    end: currentBucketStarts[index] + currentBucketMs,
+  });
+}
+
 onBeforeUnmount(() => {
   chart.value?.dispose();
   chart.value = undefined;
@@ -159,7 +180,7 @@ onBeforeUnmount(() => {
 <template>
   <section class="panel">
     <header class="panel-header">
-      <span class="panel-title">箱线统计 · CH-{{ store.selectedChannelId }}（框选箱体可联动曲线下钻）</span>
+      <span class="panel-title">箱线统计 · CH-{{ store.selectedChannelId }}（点击箱体下钻，右上角刷选可框选区间）</span>
       <span class="panel-info">{{ statsInfo }}</span>
       <span v-if="loading" class="panel-loading">加载中…</span>
     </header>
