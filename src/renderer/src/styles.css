@@ -1,0 +1,60 @@
+/**
+ * 全局样式：深色工程风，突出数据可读性（等宽数字）。
+ */
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #0d141c;
+  color: #c9d6e2;
+  font-family:
+    'Segoe UI',
+    'PingFang SC',
+    'Microsoft YaHei',
+    system-ui,
+    sans-serif;
+  font-size: 14px;
+}
+
+.panel {
+  background: #111b26;
+  border: 1px solid #1e2a38;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #1e2a38;
+  font-size: 13px;
+}
+
+.panel-title {
+  font-weight: 600;
+}
+
+.panel-info {
+  color: #5f7285;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.panel-loading {
+  margin-left: auto;
+  color: #4da3ff;
+  font-size: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3a4c;
+  border-radius: 4px;
+}
