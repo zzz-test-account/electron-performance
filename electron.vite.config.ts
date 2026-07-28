@@ -1,5 +1,6 @@
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite';
 import vue from '@vitejs/plugin-vue';
+import vueDevTools from 'vite-plugin-vue-devtools';
 import { resolve } from 'node:path';
 
 /**
@@ -22,7 +23,16 @@ export default defineConfig({
   },
   renderer: {
     root: resolve(__dirname, 'src/renderer'),
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      // 内嵌式 Vue DevTools（基于 Vue DevTools v7+，注入页面内调试面板），
+      // 仅开发模式生效；相比 electron-devtools-installer 无需访问 Chrome 扩展商店。
+      // 在 Electron 渲染进程（vite dev server）中开箱即用。
+      vueDevTools({
+        appendTo: 'src/main.ts',
+        launchEditor: 'code',
+      }),
+    ],
     build: { outDir: resolve(__dirname, 'out/renderer') },
     worker: { format: 'es' },
   },
